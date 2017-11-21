@@ -24,9 +24,9 @@
 % OP..
 % OP..
 % OP.R
-grid_size(6, 6).
+grid_size(7, 7).
 
-r2d2_init_location(location(6, 6)).
+r2d2_init_location(location(7, 7)).
 teleport(location(1, 2)).
 
 % rock_location(location(2, 2)).
@@ -52,5 +52,3 @@ pressure_pad(location(10, 10)).
 % % pressure_pad(location(4, 1)).
 
 obstacle(location(1, 1)).
-
-depth_limit(15).
