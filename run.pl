@@ -2,8 +2,10 @@
 %                                   Query                                     %
 % =========================================================================== %
 
+% Example Query: search([]).
+
 % Search Depth Limit
-depth_limit(15).
+depth_limit(16).
 
 % Load the problem
 :- [r2d2].
