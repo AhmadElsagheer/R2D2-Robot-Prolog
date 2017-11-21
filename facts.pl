@@ -24,13 +24,13 @@
 % OP..
 % OP..
 % OP.R
-grid_size(4, 4).
+grid_size(6, 6).
 
-r2d2_init_location(location(4, 4)).
-teleport(location(4, 3)).
+r2d2_init_location(location(6, 6)).
+teleport(location(1, 2)).
 
-rock_location(location(2, 2)).
-pressure_pad(location(2, 1)).
+% rock_location(location(2, 2)).
+% pressure_pad(location(2, 1)).
 
 % rock_location(location(3, 2)).
 % pressure_pad(location(3, 1)).
@@ -46,8 +46,8 @@ pressure_pad(location(2, 1)).
 % % rock_location(location(2, 2)).
 % % rock_location(location(3, 2)).
 % % rock_location(location(1, 3)).
-% rock_location(location(10, 10)).
-% pressure_pad(location(10, 10)).
+rock_location(location(10, 10)).
+pressure_pad(location(10, 10)).
 % % pressure_pad(location(3, 1)).
 % % pressure_pad(location(4, 1)).
 

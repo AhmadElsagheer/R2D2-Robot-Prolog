@@ -80,7 +80,7 @@ rock(Cell1, result(A, S)):-
     in_grid(Cell1),
     (robot_away(Cell1, A, S), rock(Cell1, S);
     action(A, DX, DY), Cell1 = location(X, Y), NX is X - DX, NY is Y - DY,
-    Cell2 = location(NX, NY), valid_rock_move(Cell2, Cell1, A, S)).
+    Cell2 = location(NX, NY), movable_rock(_, Cell2, Cell1, A, S)).
 
 %============================================================================ %
 %                             Axioms Constraints                              %
@@ -97,27 +97,27 @@ valid_move(Cell1, Cell2, A, S):-
     in_grid(Cell1),
     (free_cell(Cell2, S);
      teleport(Cell2), active_teleport(S);
-     movable_rock(Cell2, _, A, S)
+     movable_rock(Cell1, Cell2, _, A, S)
     ).
 
-% movable_rock(Cell1, Cell2, Cell3, A, S):-
-%     action(A, DX, DY), Cell2 = location(X2, Y2),
-%     Cell1 = location(X1, Y1), X1 is X2 - DX, Y1 is Y2 - DY,
-%     Cell3 = location(X3, Y3), X3 is X2 + DX, Y3 is Y2 + DY.
-%     in_grid(Cell2), free_cell(Cell2, S), rock(Cell1, S).
+movable_rock(Cell1, Cell2, Cell3, A, S):-
+    action(A, DX, DY), Cell2 = location(X2, Y2),
+    Cell1 = location(X1, Y1), X1 is X2 - DX, Y1 is Y2 - DY,
+    Cell3 = location(X3, Y3), X3 is X2 + DX, Y3 is Y2 + DY,
+    in_grid(Cell3), free_cell(Cell3, S), rock(Cell2, S), robot(Cell1, S).
 % movable_rock(C1, C2, A, S): true if C1 is a rock and C2 is a free cell in
 % situation S and the rock will move from C1 to C2 if pushed using action A.
 % C1 is unified, C2 is the target variable to unify.
-movable_rock(Cell1, Cell2, A, S):-
-    Cell1 = location(X, Y), action(A, DX, DY),
-    X2 is X + DX, Y2 is Y + DY, Cell2 = location(X2, Y2),
-    in_grid(Cell2), free_cell(Cell2, S), rock(Cell1, S).
+% movable_rock(Cell1, Cell2, A, S):-
+%     Cell1 = location(X, Y), action(A, DX, DY),
+%     X2 is X + DX, Y2 is Y + DY, Cell2 = location(X2, Y2),
+%     in_grid(Cell2), free_cell(Cell2, S), rock(Cell1, S).
 
 % valid_rock_move(C1, C2, A, S): true if moving a rock from C1 to C2 is valid.
 %
-valid_rock_move(Cell1, Cell2, A, S):-
-    Cell1 = location(X, Y), action(A, DX, DY), PX is X - DX, PY is Y - DY,
-    robot(location(PX, PY), S), movable_rock(Cell1, Cell2, A, S).
+% valid_rock_move(Cell1, Cell2, A, S):-
+%     Cell1 = location(X, Y), action(A, DX, DY), PX is X - DX, PY is Y - DY,
+% robot(location(PX, PY), S), movable_rock(Cell1, Cell2, A, S).
 
 % robot_away(Cell, A, S): true if the robot at situation result(A, S) is not at Cell.
 robot_away(location(X, Y), A, S):-
